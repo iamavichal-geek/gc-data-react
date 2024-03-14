@@ -1,0 +1,7 @@
+.form-container{
+    background-color:rgb(129, 129, 129);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    
+}
