@@ -26,9 +26,9 @@
   }
   
   .result2-th {
-    background-color: #008b9a;
+    background-color: #b1eecf;
     border-bottom: 1px solid #ddd;
-    color: white;
+    color: rgb(0, 0, 0);
   }
   
   tr:nth-child(even) {

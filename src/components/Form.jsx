@@ -6,6 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import RiskScore from './Result';
 import Result2 from './Result2';
+import axios from "axios";
 
 function ContactForm() {
     const initialData = {
@@ -21,34 +22,60 @@ function ContactForm() {
     const [formData, setFormData] = useState(initialData)
     const [showForm, setShowForm] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [resultData, setResultData] = useState(null);
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value })
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const req = {
+            "ZIP CODE": formData.zipCode,
+            "ADDRESS": formData.address || "NaN",
+            "GENDER": formData.gender || "NaN",
+            "AGE": formData.age || "NaN",
+            "RACE": formData.race || "NaN",
+            "INCOME": formData.income || "NaN",
+            "EDUCATION": formData.education || "NaN",
+            "VETERAN STATUS": formData.veteranStatus || "NO"
+        }
+
+        try {
+            const response = await axios.post("https://e918-35-202-242-152.ngrok-free.app/predict", req);
+            setResultData({ req, res: response.data });
+
+            
+        } catch (error) {
+            console.log("error : ", error);
+            setResultData({ req, res: null});
+        }
+
         setIsLoading(true);
-        console.log('Form submitted:', formData)
+        console.log('Form submitted:', req)
+        console.log(resultData)
         setFormData(initialData)
         setShowForm(false);
-        setTimeout(()=>{
-            
-            
-            setIsLoading(false);
-        
-        }, 3000)
+
+        // setTimeout(() => {
+
+
+        //     setIsLoading(false);
+
+        // }, 3000)
+
+        setIsLoading(false)
     }
 
     return (<>
-        {isLoading &&  <div className="loader" style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"20%", flexDirection:"column"}}
+        {isLoading && <div className="loader" style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20%", flexDirection: "column" }}
         ><Box >
-      <CircularProgress />
-    </Box><h2>Getting your results...</h2></div>}
-        {showForm  && (<div className="mx-auto px-4 py-8  bg-[#d3d3d3] -md w-[100vw]">
-            
+                <CircularProgress />
+            </Box><h2>Getting your results...</h2></div>}
+        {showForm && (<div className="mx-auto px-4 py-8  bg-[#d3d3d3] -md w-[100vw]">
+
             <div className="flex h-[100vh] justify-center gap-0">
-                <img src={Image} alt="" className='hidden md:block' style={{borderRadius:"6px"}} />
+                <img src={Image} alt="" className='hidden md:block' style={{ borderRadius: "6px" }} />
                 <div className="max-w-md mx-0 bg-white p-8 rounded-md shadow-md h-90">
                     <h2 className="text-2xl font-semibold text-center mb-4">ENTER YOUR DETAILS</h2>
                     {/* <p className="text-center text-gray-500 mb-8">
@@ -65,7 +92,7 @@ function ContactForm() {
                                     className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                                     value={formData.zipCode}
                                     onChange={handleChange}
-                                    required
+
                                 />
                             </div>
                             <div className='flex flex-col sm:flex-row gap-2'>
@@ -77,7 +104,7 @@ function ContactForm() {
                                         className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                                         value={formData.gender}
                                         onChange={handleChange}
-                                        required
+
                                     >
                                         <option value="">Select Gender</option>
                                         <option value="male">Male</option>
@@ -93,7 +120,7 @@ function ContactForm() {
                                         className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                                         value={formData.age}
                                         onChange={handleChange}
-                                        required
+
                                     />
                                 </div>
                             </div>
@@ -116,7 +143,7 @@ function ContactForm() {
                                     className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                                     value={formData.education}
                                     onChange={handleChange}
-                                    required
+
                                 />
                             </div>
                             <div>
@@ -127,7 +154,7 @@ function ContactForm() {
                                     className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                                     value={formData.veteranStatusStatus}
                                     onChange={handleChange}
-                                    required
+
                                 />
                             </div>
                             <div>
@@ -138,7 +165,7 @@ function ContactForm() {
                                     className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                                     value={formData.race}
                                     onChange={handleChange}
-                                    required
+
                                 />
                             </div>
                             <div>
@@ -149,7 +176,7 @@ function ContactForm() {
                                     className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                                     value={formData.address}
                                     onChange={handleChange}
-                                    required
+
                                 />
                             </div>
                         </div>
@@ -162,13 +189,13 @@ function ContactForm() {
                 </div>
             </div>
         </div>)}
-        {!isLoading && !showForm &&
-         (<div className="results" style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-            <RiskScore />
-            <hr/><h1 style={{fontWeight:"bold", textAlign:"center", marginTop:"20px", fontSize:"20px"}}>Contacts</h1>
-            <Result2/></div>)}
+        {!isLoading && !showForm && 
+            (<div className="results" style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <RiskScore data={resultData}/>
+                <hr /><h1 style={{ fontWeight: "bold", textAlign: "center", marginTop: "20px", fontSize: "20px" }}>Contacts</h1>
+                <Result2 data={resultData} /></div>)}
 
-        </>)
+    </>)
 }
 
 export default ContactForm
