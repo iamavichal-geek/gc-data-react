@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderCircleChart } from '../circleChart';
 import { renderRadarChart } from '../radarChart';
-import Form from "../components/Form";
+// import Form from "../components/Form";
 
 function RiskScore() {
 
@@ -12,7 +12,7 @@ function RiskScore() {
     }, [])
     return (
 
-        <div className='flex gap-4 w-screen justify-evenly p-8 bg-[#1F1F1F]'>
+        <div className='flex gap-4 w-screen justify-evenly p-8 bg-[]'>
             <div className="bg-white text-slate-500 rounded-lg w-96 overflow-hidden h-min">
                 <h1 className='w-full bg-[#D9D9D9] p-4 text-center text-black font-bold'>User Data</h1>
                 <ul className='py-3'>

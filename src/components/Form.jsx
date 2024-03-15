@@ -4,6 +4,8 @@ import Image from "../assets/health-ai.jpg"
 // import { Audio } from 'react-loader-spinner';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import RiskScore from './Result';
+import Result2 from './Result2';
 
 function ContactForm() {
     const initialData = {
@@ -12,7 +14,7 @@ function ContactForm() {
         age: '',
         income: '',
         education: '',
-        mentalStatus: '',
+        veteranStatus: '',
         race: '',
         address: '',
     }
@@ -119,11 +121,11 @@ function ContactForm() {
                             </div>
                             <div>
                                 <input
-                                    id="mentalStatus"
-                                    name="mentalStatus"
-                                    placeholder='Mental Status'
+                                    id="veteranStatus"
+                                    name="veteranStatus"
+                                    placeholder='Veteran Status'
                                     className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                                    value={formData.mentalStatus}
+                                    value={formData.veteranStatusStatus}
                                     onChange={handleChange}
                                     required
                                 />
@@ -160,6 +162,12 @@ function ContactForm() {
                 </div>
             </div>
         </div>)}
+        {!isLoading && !showForm &&
+         (<div className="results" style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
+            <RiskScore />
+            <hr/><h1 style={{fontWeight:"bold", textAlign:"center", marginTop:"20px", fontSize:"20px"}}>Contacts</h1>
+            <Result2/></div>)}
+
         </>)
 }
 
