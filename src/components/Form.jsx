@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 // import { input, Textarea, Button } from '@tailwindcss/react'
 import Image from "../assets/health-ai.jpg"
+// import { Audio } from 'react-loader-spinner';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 function ContactForm() {
     const initialData = {
@@ -14,6 +17,8 @@ function ContactForm() {
         address: '',
     }
     const [formData, setFormData] = useState(initialData)
+    const [showForm, setShowForm] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -21,12 +26,25 @@ function ContactForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        setIsLoading(true);
         console.log('Form submitted:', formData)
         setFormData(initialData)
+        setShowForm(false);
+        setTimeout(()=>{
+            
+            
+            setIsLoading(false);
+        
+        }, 3000)
     }
 
-    return (
-        <div className="mx-auto px-4 py-8  bg-[#d3d3d3] -md w-[100vw]">
+    return (<>
+        {isLoading &&  <div className="loader" style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"20%", flexDirection:"column"}}
+        ><Box >
+      <CircularProgress />
+    </Box><h2>Getting your results...</h2></div>}
+        {showForm  && (<div className="mx-auto px-4 py-8  bg-[#d3d3d3] -md w-[100vw]">
+            
             <div className="flex h-[100vh] justify-center gap-0">
                 <img src={Image} alt="" className='hidden md:block' style={{borderRadius:"6px"}} />
                 <div className="max-w-md mx-0 bg-white p-8 rounded-md shadow-md h-90">
@@ -141,8 +159,8 @@ function ContactForm() {
                     </form>
                 </div>
             </div>
-        </div>
-    )
+        </div>)}
+        </>)
 }
 
 export default ContactForm
