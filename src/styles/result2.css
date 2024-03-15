@@ -1,0 +1,52 @@
+.result2-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    
+  }
+  
+  .result2-table {
+    border-collapse: collapse;
+    width: 50%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+  }
+  
+  .result2-th,
+  .result2-td {
+    /* text-align: left; */
+    padding: 16px;
+    
+
+  }
+  
+  .result2-th {
+    background-color: #008b9a;
+    border-bottom: 1px solid #ddd;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+
+  .result2-table tr {
+    border-bottom: 2px solid #333; /* Darken the row lines */
+  }
+  
+  .result2-table th,
+  .result2-table td {
+    border-right: 2px solid #333; /* Darken the column lines */
+    padding: 16px;
+  }
+  
+  .result2-table th:last-child,
+  .result2-table td:last-child {
+    border-right: none; /* Remove the right border for the last column */
+  }

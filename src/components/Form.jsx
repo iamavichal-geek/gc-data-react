@@ -26,14 +26,14 @@ function ContactForm() {
     }
 
     return (
-        <div className="mx-auto px-4 py-8 bg-slate-500 w-[100vw]">
-            <div className="flex h-[90vh] justify-center gap-0">
-                <img src={Image} alt="" className='hidden md:block' />
-                <div className="max-w-md mx-0 bg-white p-8 rounded-md shadow-md">
-                    <h2 className="text-2xl font-semibold text-center mb-4">GET IN TOUCH</h2>
-                    <p className="text-center text-gray-500 mb-8">
+        <div className="mx-auto px-4 py-8  bg-[#d3d3d3] -md w-[100vw]">
+            <div className="flex h-[100vh] justify-center gap-0">
+                <img src={Image} alt="" className='hidden md:block' style={{borderRadius:"6px"}} />
+                <div className="max-w-md mx-0 bg-white p-8 rounded-md shadow-md h-90">
+                    <h2 className="text-2xl font-semibold text-center mb-4">ENTER YOUR DETAILS</h2>
+                    {/* <p className="text-center text-gray-500 mb-8">
                         24/7 We will answer your questions and problems
-                    </p>
+                    </p> */}
                     <form onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 gap-4">
                             <div>
